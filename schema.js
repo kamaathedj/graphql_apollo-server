@@ -2,10 +2,18 @@ export const  typedefs = `#graphql
 type Book {
 id:ID!
 title: String!
-author: String!
+author: Author!
 type:bookType
 }
 
+type Author{
+    id:ID!
+    name:String!
+}
+input Author_input{
+    id:ID!
+    name:String!
+}
 enum bookType{
     science, romance
 }
@@ -13,14 +21,15 @@ enum bookType{
 input book{
     id:ID!
     title: String!
-    author:string!
+    author:Author_input
     booktype:bookType!
 }
 
 type Query {
 books: [Book]
 bookById(id: ID!):Book
-}
+authors:[Author]
+},
 
 type Mutation{
  addBook(bookInput:book) :Book   

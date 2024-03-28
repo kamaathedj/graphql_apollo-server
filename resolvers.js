@@ -2,22 +2,55 @@ const books = [
 
     {
       title: 'The Awakening',
-      author: 'Kate Chopin',
-      id:1
+      author_id: '1',
+      id:'1',
+      type:'romance'
   
     },
   
     {
       title: 'City of Glass',
-       author: 'Paul Auster',
-       id:2
+       author_id: '2',
+       id:'2',
+       type:'science'
     },
   
   ];
 
+  const Authors = [{
+    id:'1',
+    name:'kate chopin'
+  },
+  {
+    id:'2',
+    name:'Paul Auster'
+  }
+]
+
 export const resolvers={
     Query:{
-        books:() =>books,
-        bookById:(_,args)=>books.find(book=>book.id === args.id)
+        books(){
+          return books;
+        },
+        bookById(_,args,context,info){
+          console.log(context);
+           return books.find(book=>book.id === args.id);
+           
+        },
+        authors(){
+          return Authors;
+        }
+
+    },
+    Book:{
+      author(parent){
+        return Authors.find(author=>author.id===parent.author_id)
+      }
+    },
+    Mutation:{
+      addBook(_,args){
+       console.log(books.push(args.bookInput));
+       return args.bookInput;
+      }
     }
 }
