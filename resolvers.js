@@ -29,11 +29,12 @@ const books = [
 
 export const resolvers={
     Query:{
-        books(){
-          return books;
+       async books(_,args,{dataSources}, info){
+          return await dataSources.booksApi
+          //dataSources.getData().then(d =>console.log(data)) 
+          //return books;
         },
         bookById(_,args,context,info){
-          console.log(context);
            return books.find(book=>book.id === args.id);
            
         },
