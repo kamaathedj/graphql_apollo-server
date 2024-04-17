@@ -30,7 +30,7 @@ const books = [
 export const resolvers={
     Query:{
        async books(_,args,{dataSources}, info){
-          return await dataSources.booksApi
+          return await dataSources.booksApi;
           //dataSources.getData().then(d =>console.log(data)) 
           //return books;
         },

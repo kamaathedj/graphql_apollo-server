@@ -1,0 +1,3 @@
+module.exports = {
+    book: 'book',
+  };
